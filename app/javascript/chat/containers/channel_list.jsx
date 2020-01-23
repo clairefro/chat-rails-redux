@@ -14,7 +14,7 @@ class ChannelList extends Component {
 
   handleClick = (channel) => {
     this.props.selectChannel(channel);
-    this.props.fetchMessages(channel);
+    this.props.setMessages(channel);
   }
 
   renderChannel = (channel) => {
