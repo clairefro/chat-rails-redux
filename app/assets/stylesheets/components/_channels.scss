@@ -16,7 +16,22 @@
   }
 }
 
-.channel-list .selected {
-  font-weight: bold;
-  color: $tone-darkest;
+.channel-list {
+  ul {
+    list-style: none;
+    padding-left: 0;
+    li {
+      padding-bottom: 0.3rem;
+    }
+  }
+  a {
+    color: $tone-dark;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  .active {
+    font-weight: bold;
+    color: $tone-darkest;
+  }
 }

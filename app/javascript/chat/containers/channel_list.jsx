@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom'; //withRouter to allow access to URL
 import { connect } from 'react-redux';
 import { setMessages, selectChannel } from '../actions/index';
 
@@ -17,11 +17,11 @@ class ChannelList extends Component {
   }
 
   renderChannel = (channel) => {
-    console.log(channel)
+    console.log(this.props.match.params)
     return (
       <li
         key={channel.id}
-        className={channel === this.props.selectedChannel ? 'active' : null}
+        className={channel.name === this.props.match.params.channel ? 'active' : null}
         onClick={() => this.handleClick(channel.name)}>
         <Link
           to={`/channels/${channel.name}`}>
@@ -31,7 +31,6 @@ class ChannelList extends Component {
     )
   }
 
-
   render() {
     const { channels } = this.props;
 
@@ -39,7 +38,9 @@ class ChannelList extends Component {
       <div className="channel-list-panel">
         <h3>Redux Chat</h3>
         <div className="channel-list">
+          <ul>
           {channels.map((channel) => this.renderChannel(channel))}
+          </ul>
         </div>
       </div>
     );
@@ -59,4 +60,4 @@ function mapReduxStateToProps(reduxState) {
   });
 }
 
-export default connect(mapReduxStateToProps, mapDispatchToProps)(ChannelList);
+export default withRouter(connect(mapReduxStateToProps, mapDispatchToProps)(ChannelList));;
