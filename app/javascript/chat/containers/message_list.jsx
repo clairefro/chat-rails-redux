@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { setMessages } from '../actions/index';
 
 import Message from '../components/message';
@@ -8,26 +9,26 @@ import MessageForm from '../containers/message_form';
 
 class MessageList extends Component {
   componentWillMount() {
-    this.fetchMessages();
+    this.fetchMessages(this.props.match.params.channel);
   }
 
   componentDidMount() {
-    this.refresher = setInterval(this.fetchMessages, 5000);
+    // this.refresher = setInterval(this.fetchMessages, 5000);
   }
 
   componentDidUpdate() {
     this.list.scrollTop = this.list.scrollHeight;
   }
 
-  fetchMessages = () => {
-    this.props.setMessages(this.props.selectedChannel);
+  fetchMessages = (channel) => {
+    this.props.setMessages(channel);
   }
 
   render() {
     return (
       <div className="channel-container">
         <div className="channel-title">
-          <h3>Channel #{this.props.selectedChannel}</h3>
+          <h3>Channel #{this.props.match.params.channel}</h3>
         </div>
         <hr/>
         <div className="channel-content" ref={(list) => { this.list = list; }}>
@@ -52,9 +53,8 @@ function mapDispatchToProps(dispatch) {
 
 function mapReduxStateToProps(reduxState) {
   return ({
-    messages: reduxState.messages,
-    selectedChannel: reduxState.selectedChannel
+    messages: reduxState.messages
   });
 }
 
-export default connect(mapReduxStateToProps, mapDispatchToProps)(MessageList);
+export default withRouter(connect(mapReduxStateToProps, mapDispatchToProps)(MessageList));

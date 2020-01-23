@@ -12,7 +12,6 @@ import App from './components/app';
 
 // State and reducers
 import messagesReducer from './reducers/messages_reducer';
-import selectedChannelReducer from './reducers/selected_channel_reducer';
 
 const identityReducer = (state = null, action) => state;
 

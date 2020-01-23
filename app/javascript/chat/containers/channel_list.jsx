@@ -2,22 +2,22 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { Link, withRouter } from 'react-router-dom'; //withRouter to allow access to URL
 import { connect } from 'react-redux';
-import { setMessages, selectChannel } from '../actions/index';
+import { selectChannel, setMessages } from '../actions/index';
 
 class ChannelList extends Component {
   // fetch channel messages on each prop change (only if clicked channel differs from selected)
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.selectedChannel !== this.props.selectedChannel) {
-      this.props.setMessages(nextProps.selectedChannel);
-    }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.selectedChannel !== this.props.selectedChannel) {
+  //     this.props.setMessages(nextProps.selectedChannel);
+  //   }
+  // }
 
   handleClick = (channel) => {
     this.props.selectChannel(channel);
+    this.props.fetchMessages(channel);
   }
 
   renderChannel = (channel) => {
-    console.log(this.props.match.params)
     return (
       <li
         key={channel.id}
