@@ -11,3 +11,25 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+
+@import './components/messages';
+@import './components/channels';
+@import './components/workspaces';
+@import './components/button';
+
+
+body {
+  font-family: Helvetica;
+}
+
+.app {
+  margin: 0;
+  display: flex;
+  height: 100vh;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: bold;
+}

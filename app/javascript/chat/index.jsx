@@ -8,7 +8,6 @@ import reduxPromise from 'redux-promise';
 
 // internal modules
 import App from './components/app';
-import '../assets/stylesheets/application.scss';
 
 // State and reducers
 import messagesReducer from './reducers/messages_reducer';

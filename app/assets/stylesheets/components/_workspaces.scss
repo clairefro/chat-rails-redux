@@ -1,0 +1,19 @@
+@import './variables';
+
+.workspace-list {
+  padding: 20px 0;
+  background-color: $tone-dark;
+  .workspace {
+    padding: 5px;
+    margin: 5px 6px;
+
+    width: 5em;
+    transition: 0.3s;
+    border-radius: 8px;
+    &:hover {
+      cursor: pointer;
+      transition: 0.3s;
+      background-color: $tone-medium;
+    }
+  }
+}

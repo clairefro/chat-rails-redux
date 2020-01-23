@@ -1,0 +1,68 @@
+@import './variables';
+
+.channel-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  .channel-content {
+    overflow-y: scroll;
+    margin: 10px 0;
+    &::-webkit-scrollbar {
+      background-color: $tone-light;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: $tone-dark;
+    }
+  }
+}
+
+.channel-title {
+  display: flex;
+  align-items: center;
+  h3 {
+    color: $tone-darkest;
+  }
+}
+
+.message {
+  margin-bottom: 10px;
+  h3 {
+    margin-right: 6px;
+    margin-bottom: 0;
+    margin-top: 0;
+    color: $tone-darkest;
+  }
+  p {
+    margin: 0;
+    color: $tone-darkest;
+  }
+  .message-header {
+    display: flex;
+    min-width: 350px;
+    .timestamp {
+      font-style: italic;
+      color: $tone-dark;
+    }
+  }
+}
+
+.message-form {
+  color: $tone-darkest;
+  display: flex;
+  margin-top: auto;
+  border-color: $tone-medium;
+  input {
+    margin-right: 6px;
+    &:focus {
+      box-shadow: none;
+      border-color: $tone-darkest;
+    }
+  }
+}
+
+hr {
+  border-top: 1px solid $tone-darkest;
+  margin: 20px 0px;
+  margin-bottom: 0;
+}
