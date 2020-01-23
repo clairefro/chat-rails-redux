@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setMessages, selectChannel } from '../actions/index';
 
@@ -11,9 +12,25 @@ class ChannelList extends Component {
     }
   }
 
-  handleClick = (e) => {
-    this.props.selectChannel(e.target.innerHTML.split('#')[1]);
+  handleClick = (channel) => {
+    this.props.selectChannel(channel);
   }
+
+  renderChannel = (channel) => {
+    console.log(channel)
+    return (
+      <li
+        key={channel.id}
+        className={channel === this.props.selectedChannel ? 'active' : null}
+        onClick={() => this.handleClick(channel.name)}>
+        <Link
+          to={`/channels/${channel.name}`}>
+          #{channel.name}
+        </Link>
+      </li>
+    )
+  }
+
 
   render() {
     const { channels } = this.props;
@@ -22,16 +39,7 @@ class ChannelList extends Component {
       <div className="channel-list-panel">
         <h3>Redux Chat</h3>
         <div className="channel-list">
-          {
-            channels.map((channel) => {
-              return <p
-                key={channel}
-                className={this.props.selectedChannel === channel ? 'selected': ''}
-                onClick={this.handleClick}>
-                  #{channel}
-                </p>
-              })
-          }
+          {channels.map((channel) => this.renderChannel(channel))}
         </div>
       </div>
     );
@@ -47,7 +55,6 @@ function mapDispatchToProps(dispatch) {
 
 function mapReduxStateToProps(reduxState) {
   return ({
-    channels: reduxState.channels,
     selectedChannel: reduxState.selectedChannel
   });
 }

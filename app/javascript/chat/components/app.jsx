@@ -5,10 +5,13 @@ import ChannelList from '../containers/channel_list';
 import WorkspaceList from './workspace_list';
 
 const App = () => {
+  const chatContainer = document.getElementById('chat-app');
+  const chatChannels = JSON.parse(chatContainer.dataset.channels);
+
   return (
     <div className="app">
       <WorkspaceList />
-      <ChannelList />
+      <ChannelList channels={chatChannels}/>
       <MessageList />
     </div>
   );
