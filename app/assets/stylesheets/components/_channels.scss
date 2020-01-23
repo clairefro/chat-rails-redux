@@ -32,6 +32,8 @@
   }
   .active {
     font-weight: bold;
-    color: $tone-darkest;
+    a {
+      color: $tone-darkest;
+    }
   }
 }
