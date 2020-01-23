@@ -24,14 +24,14 @@ body {
 }
 
 #chat-app {
-  height: 100vh;
+  height: 100%;
   width: 100vw;
 }
 
 .app {
   margin: 0;
   display: flex;
-  height: 100vh;
+  height: calc(100vh - 66px);
 }
 
 h3 {
