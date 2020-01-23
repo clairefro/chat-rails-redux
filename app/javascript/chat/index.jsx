@@ -4,7 +4,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { logger } from 'redux-logger';
-import reduxPromise from 'redux-promise';
+import ReduxPromise from 'redux-promise';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 // internal modules
 import App from './components/app';
@@ -13,30 +14,32 @@ import App from './components/app';
 import messagesReducer from './reducers/messages_reducer';
 import selectedChannelReducer from './reducers/selected_channel_reducer';
 
-const identityReducer = (state = null) => state;
+const identityReducer = (state = null, action) => state;
 
+const chatContainer = document.getElementById('chat-app');
+
+// currentUser is handled by rails now
 const reducers = combineReducers({
   messages: messagesReducer,
-  channels: identityReducer,
-  currentUser: identityReducer,
-  selectedChannel: selectedChannelReducer
+  channels: identityReducer
 });
 
 // apply middlewares
-const middlewares = applyMiddleware(logger, reduxPromise);
+const middlewares = applyMiddleware(logger, ReduxPromise);
 
 const initialState = {
   messages: [],
-  channels: ['general', 'react', 'ruby', 'paris', 'montreal', 'help'],
-  currentUser: prompt("What is your username?") || `anonymous${Math.floor(10 + (Math.random() * 90))}`,
-  // currentUser: `anonymous${Math.floor(10 + (Math.random() * 90))}`,
-  selectedChannel: 'general'
+  channels: ['general', 'react', 'ruby', 'paris', 'montreal', 'help']
 };
 
 // render an instance of the component in the DOM
 ReactDOM.render(
   <Provider store={createStore(reducers, initialState, middlewares)}>
-    <App />
+    <BrowserRouter>
+      <Switch>
+        <Route path="/channels/:channel" component={App} />
+      </Switch>
+    </BrowserRouter>
   </Provider>,
-  document.getElementById('root')
+  chatContainer
 );

@@ -13,7 +13,7 @@ const Message = (props) => {
         <h3>{author}</h3>
         <p className="timestamp">- {timestamp}</p>
       </div>
-      <p className="message-content">{emojify(content)}</p>
+      <p className="message-content">{/*emojify(content)*/ content}</p>
     </div>
   );
 };
