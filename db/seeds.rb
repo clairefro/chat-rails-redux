@@ -14,17 +14,21 @@ Channel.destroy_all
 
 puts "creating channels..."
 channel = Channel.create({name:'general'})
-Channel.create({name:'paris'})
-Channel.create({name:'montreal'})
-Channel.create({name:'react'})
-Channel.create({name:'help'})
+Channel.create(name:'paris')
+Channel.create(name:'montreal')
+Channel.create(name:'react')
+Channel.create(name:'help')
 
 puts "creating sample users..."
-blair = User.create({email: "blair@example.com", password:"aaaaaa"})
-example = User.create({email: "example@example.com", password:"aaaaaa"})
+blair = User.create(email: "blair@example.com", password:"aaaaaa")
+example = User.create(email: "example@example.com", password:"aaaaaa")
 
 puts "creating messages in general channel..."
-Message.new({content:"hello world", user: blair, channel: channel})
-Message.new({content:"I'm not a bot", user: example, channel: channel})
+messages = [
+  Message.new(content:"hello world", user: blair, channel: channel),
+  Message.new(content:"I'm not a bot", user: example, channel: channel)
+]
+messages.each {|m| m.save!}
+
 
 puts "done"
