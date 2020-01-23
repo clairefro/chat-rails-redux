@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { createMessage } from '../actions/index';
 
 class MessageForm extends Component {
@@ -19,7 +20,7 @@ class MessageForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault(); // prevent page reload
-    this.props.createMessage(this.props.selectedChannel, this.props.currentUser, this.state.value);
+    this.props.createMessage(this.props.match.params.channel, this.state.value);
     this.setState({ value: '' }); // Clear message form
   }
 
@@ -44,11 +45,5 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ createMessage }, dispatch);
 }
 
-function mapStateToProps(state) {
-  return {
-    currentUser: state.currentUser,
-    selectedChannel: state.selectedChannel
-  };
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(MessageForm);
+export default withRouter(connect(null, mapDispatchToProps)(MessageForm));
